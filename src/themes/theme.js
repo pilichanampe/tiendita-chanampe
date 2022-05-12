@@ -3,14 +3,17 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#FF5666"
+      main: "#81138A"
     },
     secondary: {
-      main: "#FFCCC9"
+      main: "#EFBCD5"
     },
     accent: {
-      main: "#00FDDC"
+      main: "#BE97C6"
     },
+    red: {
+      main: "#F73A3A"
+    }
   },
   shape: {
     borderRadius: 4
