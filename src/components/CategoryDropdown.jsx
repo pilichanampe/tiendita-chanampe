@@ -15,11 +15,9 @@ export default function CategoryDropdown() {
   );
 }
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const categories = [
   { label: 'Cuadernos' },
   { label: 'Cartucheras' },
   { label: 'Mochilas' },
   { label: 'Papel' },
-
 ];

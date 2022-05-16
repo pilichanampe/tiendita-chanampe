@@ -12,7 +12,7 @@ function CartWidget({ items }) {
       size="small"
       invisible={false}
     >
-      <ShoppingCartIcon></ShoppingCartIcon>
+      <ShoppingCartIcon />
     </Badge>
   )
 }

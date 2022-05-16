@@ -3,6 +3,10 @@ import React from 'react'
 import ItemCount from './ItemCount'
 
 function ItemListContainer({ greeting }) {
+  const onAdd = (amount) => {
+    alert(`Se agregaron al carrito ${amount} productos`)
+  }
+
   return (
     <Box
       sx={{
@@ -17,9 +21,15 @@ function ItemListContainer({ greeting }) {
       <ItemCount
         stock={5}
         initial={1}
+        onAdd={onAdd}
+      />
+      <ItemCount
+        stock={0}
+        initial={1}
+        onAdd={onAdd}
       />
     </Box>
   )
 }
 
-export default ItemListContainer
+export default ItemListContainer;

@@ -25,13 +25,12 @@ export default function NavBar() {
               marginRight: '5px',
               marginBottom: '4px'
             }}
-          ></EmojiNatureIcon>
+          />
           <Typography
             variant="h6"
             component="div"
             sx={{
               flexGrow: 1,
-
             }}
           >
             La Tiendita
@@ -41,10 +40,9 @@ export default function NavBar() {
                 <Typography textAlign="center">{page}</Typography>
               </MenuItem>
             ))}
-          <CartWidget items="4"></CartWidget>
+          <CartWidget items="4" />
         </Toolbar>
       </AppBar>
     </Box>
-    // <div>Hola</div>
   );
 }
