@@ -29,7 +29,7 @@ export const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          background: "#393e46"
+          background: "#ffffff"
         }
       },
       defaultProps: {

@@ -11,7 +11,7 @@ import InterestsIcon from '@mui/icons-material/Interests';
 import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
 
 export default function NavBar() {
-  const pages = ['Cuadernos', 'Cartucheras', 'Resmas'];
+  const pages = ['Cuadernos', 'Cartucheras', 'Marcadores & Lapiceras'];
 
   return (
     <Box sx={{ flexGrow: 1 }}>
