@@ -29,13 +29,14 @@ export default function Item({ item }) {
         />
       </CardContent>
       <Divider />
-      <CardActions sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        padding: '14px 16px',
-        maxHeight: '146px'
-      }}>
+      <CardActions
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          padding: '14px 16px',
+        }}
+      >
         <Typography
           variant="p"
           sx={{

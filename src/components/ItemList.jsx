@@ -5,6 +5,7 @@ import Item from './Item';
 function ItemList({ items }) {
   return (
     <Grid
+      component="section"
       container
       spacing={3}
       sx={{

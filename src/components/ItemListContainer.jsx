@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import Item from './Item';
 import ItemCount from './ItemCount'
@@ -18,6 +18,13 @@ function ItemListContainer({ greeting }) {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve([
+            {
+              id: 126,
+              title: 'Lapicera Uniball Signo Broad Ub-153 Trazo 1.0 Blanca',
+              description: `El vendedor no incluyó una descripción del producto.`,
+              price: 590,
+              pictureUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_997894-MLA48666734745_122021-F.webp',
+            },
             {
               id: 123,
               title: 'Cuaderno A4 Rayado Tapa Semirigida Espiralado Diseños',
@@ -70,29 +77,31 @@ function ItemListContainer({ greeting }) {
 
   return (
     <Box
+      component="section"
       sx={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         margin: '16px',
+        width: '100%'
       }}
     >
-      {greeting}
-      <ItemCount
-        stock={5}
-        initial={1}
-        onAdd={onAdd}
-      />
-      <ItemCount
-        stock={0}
-        initial={1}
-        onAdd={onAdd}
-      />
+      <Typography
+        display="flex"
+        variant="h1"
+        sx={{
+          fontSize: '3rem',
+        }}
+      >
+        {greeting}
+      </Typography>
       {
         loading && <span>Cargando...</span>
       }
-      <ItemList items={items} />
+      {
+        <ItemList items={items} />
+      }
     </Box>
   )
 }

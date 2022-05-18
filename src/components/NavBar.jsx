@@ -14,8 +14,12 @@ export default function NavBar() {
   const pages = ['Cuadernos', 'Cartucheras', 'Marcadores & Lapiceras'];
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{ flexGrow: 1 }}
+      component="header"
+    >
       <AppBar
+        component="nav"
         position="static"
         color="primary"
       >

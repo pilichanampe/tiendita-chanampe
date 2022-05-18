@@ -9,7 +9,7 @@ export const theme = createTheme({
       main: "#EFBCD5"
     },
     accent: {
-      main: "#BE97C6"
+      main: "#1976d2"
     },
     red: {
       main: "#F73A3A"
@@ -19,22 +19,58 @@ export const theme = createTheme({
     borderRadius: 4
   },
   components: {
-    MuiButton: {
-      defaultProps: {
-        sx: {
-          margin: 1
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          display: 'flex',
+          flexDirection: 'column',
+          margin: 'auto',
+          height: '100%',
+          width: '100%',
+        },
+        section: {
+          maxWidth: '1284px',
         }
       }
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+
+        }
+      },     
+    },
+    MuiButton: {
+      // defaultProps: {
+      //   sx: {
+      //     margin: 3
+      //   },
+      // },
+      styleOverrides: {
+        root: {
+          marginTop: 6,
+          marginBottom: 6,
+        }
+      },
+    
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          background: "#ffffff"
+          background: "#ffffff",
         }
       },
       defaultProps: {
-        elevation: 0
+        elevation: 3,
       }
-    }
+    },
+    // MuiCard: {
+    //   styleOverrides: {
+    //     root: {
+    //       padding: '14px 16px',
+    //     }
+    //   }
+    // }
   }
 })

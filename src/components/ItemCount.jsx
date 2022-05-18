@@ -1,4 +1,4 @@
-import { Button, Box } from '@mui/material'
+import { Button, Box, Card, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
@@ -21,17 +21,43 @@ function ItemCount({ initial, stock, onAdd }) {
 
 
   return (
-    <>
-      <Box
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            mt: '6px',
+            ml: '3px',
+            color: '#a3a2a2',
+            height: '24px'
+          }}
+          >
+          {
+            (stock !== 0) &&
+            <Typography
+              component="span"
+              sx={{
+                fontSize: '0.8rem'
+              }}
+            >
+              Stock disponible: { stock }
+            </Typography>
+          }
+        </Box>
+      <Card
+        variant="outlined"
         sx={{
           display: 'flex',
           alignContent: 'center',
           justifyContent: 'space-between',
-          width: '200px',
+          width: '100%',
         }}
       >
         <IconButton
-          color="primary"
+          color="accent"
           onClick={() => decrease()}
           disabled={!stock}
         >
@@ -48,17 +74,22 @@ function ItemCount({ initial, stock, onAdd }) {
           <span>{ stock ? amount : 'Sin stock' }</span>
         </Box>
         <IconButton
-          color="primary"
+          color="accent"
           onClick={() => increase()}
           disabled={!stock}
         >
           <AddIcon />
         </IconButton>
-      </Box>
+      </Card>
       <Button
         onClick={() => onAdd(amount)}
         variant="contained"
         disabled={!stock}
+        color="accent"
+        sx={{
+          width: '100%',
+          color: 'white'
+        }}
       >
         <AddShoppingCartIcon
           fontSize="small"
@@ -68,7 +99,7 @@ function ItemCount({ initial, stock, onAdd }) {
         />
         Agregar al carrito
       </Button>
-    </>
+    </Box>
   )
 }
 
