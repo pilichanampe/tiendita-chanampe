@@ -10,27 +10,29 @@ import {
   createTheme
 } from "@mui/material";
 import ItemListContainer from './components/ItemListContainer';
-import { Box } from '@mui/system';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <NavBar />
-      <Box
-        component="main"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '14px 16px',
-        }}
-      >
-        <ItemListContainer greeting="¡Te damos la bienvenida a La Tiendita!" />
-
-        <ItemDetailContainer greeting="Detalle del producto" />
-      </Box>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route
+            path="/"
+            element={<ItemListContainer />}
+          ></Route>
+          <Route
+            path="/category/:id"
+            element={<ItemListContainer />}
+          ></Route>
+          <Route
+            path="/item/:id"
+            element={<ItemDetailsContainer />}
+          ></Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
