@@ -9,9 +9,25 @@ import Menu from '@mui/material/Menu';
 import CartWidget from './CartWidget';
 import InterestsIcon from '@mui/icons-material/Interests';
 import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
+import { Link as RouterLink, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
-  const pages = ['Cuadernos', 'Cartucheras', 'Marcadores & Lapiceras'];
+  const categories = ['Cuadernos', 'Cartucheras', 'Marcadores', 'Lapiceras'];
+  const { id } = useParams();
+  const handleCategoryClick = (e) => {
+    console.log(e.target.textContent);
+  }
+
+  // useEffect(() => {
+  //   first
+  
+  //   return () => {
+  //     second
+  //   }
+  // }, [third])
+  
 
   return (
     <Box
@@ -23,28 +39,58 @@ export default function NavBar() {
         position="static"
         color="primary"
       >
-        <Toolbar>
-          <EmojiNatureIcon
-            sx={{
-              marginRight: '5px',
-              marginBottom: '4px'
-            }}
-          />
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: 1,
+        <Toolbar
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Link
+            to="/"
+            style={{
+              textDecoration: 'none',
+              color: 'white',
             }}
           >
-            La Tiendita
-          </Typography>
-            {pages.map((page) => (
-              <MenuItem key={page}>
-                <Typography textAlign="center">{page}</Typography>
-              </MenuItem>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+              }}
+            >
+              <EmojiNatureIcon
+                sx={{
+                  marginRight: '5px',
+                  marginBottom: '4px'
+                }}
+              />
+              La Tiendita
+            </Typography>
+          </Link>
+          <Box
+            sx={{
+              display: 'flex'
+            }}
+          >
+            {categories.map((category) => (
+              <MenuItem
+                  key={category}
+                  onClick={handleCategoryClick}
+                >
+                  <Link
+                    to={`/category/${category.toLowerCase()}`}
+                    style={{
+                      textDecoration: 'none',
+                      color: 'white',
+                    }}
+                  >
+                    <Typography textAlign="center">{category}</Typography>
+                  </Link>
+                </MenuItem>
             ))}
-          <CartWidget items="4" />
+            <CartWidget items="4" />
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

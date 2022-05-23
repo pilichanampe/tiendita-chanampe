@@ -1,10 +1,13 @@
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ItemCount from './ItemCount';
+import { Link, useParams } from 'react-router-dom';
 
 function ItemDetail({ item }) {
+  const { id } = useParams();
   const onAdd = (amount) => {
-    alert(`Se agregaron al carrito ${amount} productos`)
+    alert(`Se agregaron al carrito ${amount} productos. El item id es ${id}`);
+
   }
 
   return (
@@ -35,7 +38,7 @@ function ItemDetail({ item }) {
                 borderRadius: '4px',
               }}
               image={item.pictureUrl}
-              alt="green iguana"
+              alt="Imagen del producto"
             />
             <CardContent
               sx={{

@@ -13,6 +13,9 @@ export const theme = createTheme({
     },
     red: {
       main: "#F73A3A"
+    },
+    white: {
+      main: "#ffffff"
     }
   },
   shape: {

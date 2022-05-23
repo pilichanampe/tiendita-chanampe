@@ -29,7 +29,7 @@ function App() {
           ></Route>
           <Route
             path="/item/:id"
-            element={<ItemDetailsContainer />}
+            element={<ItemDetailContainer />}
           ></Route>
         </Routes>
       </BrowserRouter>

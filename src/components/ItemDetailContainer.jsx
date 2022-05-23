@@ -1,20 +1,21 @@
 import { Box, Typography } from '@mui/material'
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 import ItemDetail from './ItemDetail';
-
 
 function ItemDetailContainer({ greeting }) {
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(false);
+  const { id } = useParams();
 
   useEffect(() => {
-    const getItem = () => {
+    const getItem = (itemId) => {
       setLoading(true);
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(
             {
-              id: 125,
+              id: itemId,
               title: 'Marcadores Copic Sketch X 72 Linea D Doble Punta',
               description: `Packaged in a clear plastic case, a sketch set is the ideal way to begin or add to a marker collection // Refillable markers and replaceable nibs; compatible with copic air brush system // Alcohol-based ink is pemranent and non-toxic; dries acid free //
 
@@ -27,6 +28,7 @@ function ItemDetailContainer({ greeting }) {
       })
       .then(response => {
         setItem(response);
+        console.log('param id en itemdetailcontainer', id);
       })
       .catch(error => {
         console.error(error);
@@ -35,8 +37,8 @@ function ItemDetailContainer({ greeting }) {
         setLoading(false);
       });
     };
-    getItem();
-  }, []);
+    getItem(id);
+  }, [id]);
   
 
   return (

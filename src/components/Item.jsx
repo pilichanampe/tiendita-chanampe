@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardMedia, Divider } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function Item({ item }) {
   return (
@@ -56,16 +57,20 @@ export default function Item({ item }) {
         >
           {item.title}
         </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          sx={{
-            display: 'flex',
-            width: '100%',
-            alignSelf: 'flex-end',
-          }}
-        >Ver detalle</Button>
+        <Link to={`/item/${item.id}`}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            sx={{
+              display: 'flex',
+              width: '100%',
+              alignSelf: 'flex-end',
+            }}
+          >
+            Ver detalle
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
