@@ -88,7 +88,7 @@ function ItemCount({ initial, stock, onAdd }) {
         color="accent"
         sx={{
           width: '100%',
-          color: 'white'
+          color: 'white !important'
         }}
       >
         <AddShoppingCartIcon

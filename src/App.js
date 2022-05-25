@@ -4,6 +4,7 @@ import NavBar from './components/NavBar.jsx';
 import { theme } from './themes/theme';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import { CssBaseline } from '@mui/material';
+import { Box } from '@mui/system';
 
 import {
   ThemeProvider,
@@ -16,23 +17,34 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route
-            path="/"
-            element={<ItemListContainer />}
-          ></Route>
-          <Route
-            path="/category/:id"
-            element={<ItemListContainer />}
-          ></Route>
-          <Route
-            path="/item/:id"
-            element={<ItemDetailContainer />}
-          ></Route>
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <NavBar />
+          <Box
+            component="main"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '14px 16px',
+            }}
+          >
+            <Routes>
+              <Route
+                path="/"
+                element={<ItemListContainer />}
+              ></Route>
+              <Route
+                path="/category/:categoryId"
+                element={<ItemListContainer />}
+              ></Route>
+              <Route
+                path="/item/:itemId"
+                element={<ItemDetailContainer greeting="Detalle del producto" />}
+              ></Route>
+            </Routes>
+          </Box>
+        </BrowserRouter>
     </ThemeProvider>
   );
 }

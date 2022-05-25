@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardMedia, Divider } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 export default function Item({ item }) {
   return (
@@ -57,8 +57,9 @@ export default function Item({ item }) {
         >
           {item.title}
         </Typography>
-        <Link to={`/item/${item.id}`}>
           <Button
+            component={RouterLink}
+            to={`/item/${item.id}`}
             variant="contained"
             color="primary"
             size="small"
@@ -70,7 +71,6 @@ export default function Item({ item }) {
           >
             Ver detalle
           </Button>
-        </Link>
       </CardActions>
     </Card>
   );
