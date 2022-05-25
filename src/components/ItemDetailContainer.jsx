@@ -11,7 +11,6 @@ function ItemDetailContainer({ greeting }) {
 
   useEffect(() => {
     const getItem = (id) => {
-      console.log('soy item', item);
       setLoading(true);
       return new Promise((resolve) => {
         setTimeout(() => {
