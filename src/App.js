@@ -5,6 +5,7 @@ import { theme } from './themes/theme';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import { CssBaseline } from '@mui/material';
 import { Box } from '@mui/system';
+import Cart from './components/Cart';
 
 import {
   ThemeProvider,
@@ -41,6 +42,10 @@ function App() {
               <Route
                 path="/item/:itemId"
                 element={<ItemDetailContainer greeting="Detalle del producto" />}
+              ></Route>
+              <Route
+                path="/cart"
+                element={<Cart greeting="Detalle del carrito" />}
               ></Route>
             </Routes>
           </Box>

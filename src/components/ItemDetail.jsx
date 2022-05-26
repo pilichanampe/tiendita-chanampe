@@ -1,13 +1,15 @@
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ItemCount from './ItemCount';
-import { Link, useParams } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 function ItemDetail({ item }) {
-  const { id } = useParams();
+  const { itemId } = useParams();
+  const [ amount, setAmount ] = useState();
   const onAdd = (amount) => {
-    alert(`Se agregaron al carrito ${amount} productos. El item id es ${id}`);
-
+    alert(`Se agregaron al carrito ${amount} productos. El item id es ${itemId}`);
+    setAmount(amount);
   }
 
   return (
@@ -86,6 +88,23 @@ function ItemDetail({ item }) {
               stock={10}
               onAdd={onAdd}
             />
+            <Button
+              component={RouterLink}
+              variant="outlined"
+              to="/cart"
+              color="accent"
+              sx={{
+                width: '100%',
+              }}
+            >
+              Ir al carrito
+              <ShoppingCartIcon
+                fontSize="small"
+                sx={{
+                  ml: '6px',
+                }}
+              />
+            </Button>
           </Grid>
         </Grid>
       }
