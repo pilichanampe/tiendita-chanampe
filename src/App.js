@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar.jsx';
 import { theme } from './themes/theme';
@@ -6,18 +5,19 @@ import ItemDetailContainer from './components/ItemDetailContainer';
 import { CssBaseline } from '@mui/material';
 import { Box } from '@mui/system';
 import Cart from './components/Cart';
-
 import {
   ThemeProvider,
   createTheme
 } from "@mui/material";
 import ItemListContainer from './components/ItemListContainer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './contexts/CartContext';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <CartProvider>
+        <CssBaseline />
         <BrowserRouter>
           <NavBar />
           <Box
@@ -50,6 +50,7 @@ function App() {
             </Routes>
           </Box>
         </BrowserRouter>
+      </CartProvider>
     </ThemeProvider>
   );
 }

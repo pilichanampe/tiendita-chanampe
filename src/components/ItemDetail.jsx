@@ -3,26 +3,30 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ItemCount from './ItemCount';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useCartContext } from '../contexts/CartContext';
 
 function ItemDetail({ item }) {
   const { itemId } = useParams();
-  const [ amount, setAmount ] = useState();
+  const { addItem } = useCartContext();
+
+
   const onAdd = (amount) => {
     alert(`Se agregaron al carrito ${amount} productos. El item id es ${itemId}`);
-    setAmount(amount);
+    console.log('item en ItemDetail', item);
+    addItem(item, amount);
   }
 
   return (
     <>
       {
         <Grid
-          container
-          component={Card}
-          sx={{
-            width: '100%',
-            minHeight: '500px',
-            padding: '16px 0'  
-          }}
+        container
+        component={Card}
+        sx={{
+          width: '100%',
+          minHeight: '500px',
+          padding: '16px 0'  
+        }}
         >
           <Grid
             item
