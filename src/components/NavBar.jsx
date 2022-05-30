@@ -8,17 +8,11 @@ import Menu from '@mui/material/Menu';
 import CartWidget from './CartWidget';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useCartContext } from '../contexts/CartContext';
 
 export default function NavBar() {
   const categories = ['Cuadernos', 'Cartucheras', 'Marcadores', 'Lapiceras'];
-  const { id } = useParams();
-
-  useEffect(() => {
-    console.log('idParams en Navbar', id);
-
-  }, [])
-  
+  const { cartItems } = useCartContext();
 
   return (
     <Box
@@ -36,7 +30,7 @@ export default function NavBar() {
             justifyContent: 'space-between',
           }}
         >
-          <Link
+          <RouterLink
             to="/"
             style={{
               textDecoration: 'none',
@@ -52,7 +46,7 @@ export default function NavBar() {
             >
               ✨ La Tiendita ✨
             </Typography>
-          </Link>
+          </RouterLink>
           <Box
             sx={{
               display: 'flex',
@@ -61,7 +55,7 @@ export default function NavBar() {
           >
             {categories.map((category) => (
               <MenuItem key={category}>
-                  <Link
+                  <RouterLink
                     to={`/category/${category.toLowerCase()}`}
                     style={{
                       textDecoration: 'none',
@@ -69,10 +63,20 @@ export default function NavBar() {
                     }}
                   >
                     <Typography textAlign="center">{category}</Typography>
-                  </Link>
+                  </RouterLink>
                 </MenuItem>
             ))}
-          <CartWidget items="4" />
+          <RouterLink
+            to="/cart"
+            style={{
+              textDecoration: 'none',
+              color: 'white'
+            }}
+          >
+            <CartWidget
+              items={cartItems ? cartItems.length : false}
+            />
+          </RouterLink>
           </Box>
         </Toolbar>
       </AppBar>

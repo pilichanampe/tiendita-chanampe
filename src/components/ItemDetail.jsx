@@ -2,20 +2,20 @@ import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/mat
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ItemCount from './ItemCount';
 import { Link as RouterLink, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCartContext } from '../contexts/CartContext';
 
 function ItemDetail({ item }) {
   const { itemId } = useParams();
-  const { addItem } = useCartContext();
+  const { addItem, cartItems } = useCartContext();
 
 
   const onAdd = (amount) => {
-    alert(`Se agregaron al carrito ${amount} productos. El item id es ${itemId}`);
-    console.log('item en ItemDetail', item);
     addItem(item, amount);
   }
 
+  useEffect(() => {
+  }, [cartItems]);
   return (
     <>
       {

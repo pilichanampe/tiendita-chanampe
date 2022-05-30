@@ -7,7 +7,7 @@ import { Badge } from '@mui/material';
 function CartWidget({ items }) {
   return (
     <Badge
-      badgeContent={4}
+      badgeContent={items}
       color="red"
       size="small"
       invisible={false}

@@ -20,7 +20,7 @@ function ItemListContainer({ greeting }) {
             }
             return products;
           })
-        }, 2000);
+        }, 500);
       })
       .then(response => {
         setItems(response);

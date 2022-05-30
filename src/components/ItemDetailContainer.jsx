@@ -17,7 +17,7 @@ function ItemDetailContainer({ greeting }) {
           resolve(() => {
             return products.find(item => item.id.toString() === id);
           });
-        }, 2000);
+        }, 500);
       })
       .then(response => {
         setItem(response);  
