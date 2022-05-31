@@ -6,12 +6,12 @@ import { useEffect, useState } from 'react';
 import { useCartContext } from '../contexts/CartContext';
 
 function ItemDetail({ item }) {
-  const { itemId } = useParams();
   const { addItem, cartItems } = useCartContext();
-
+  const [ isAdded, setIsAdded ] = useState(false);
 
   const onAdd = (amount) => {
     addItem(item, amount);
+    setIsAdded(true);
   }
 
   useEffect(() => {
@@ -87,28 +87,31 @@ function ItemDetail({ item }) {
             >
               ${item.price}
             </Typography>
-            <ItemCount
-              initial={1}
-              stock={10}
-              onAdd={onAdd}
-            />
-            <Button
-              component={RouterLink}
-              variant="outlined"
-              to="/cart"
-              color="accent"
-              sx={{
-                width: '100%',
-              }}
-            >
-              Ir al carrito
-              <ShoppingCartIcon
-                fontSize="small"
+            {
+              !isAdded ?
+              <ItemCount
+                initial={1}
+                stock={item.stock}
+                onAdd={onAdd}
+              /> :
+              <Button
+                component={RouterLink}
+                variant="outlined"
+                to="/cart"
+                color="accent"
                 sx={{
-                  ml: '6px',
+                  width: '100%',
                 }}
-              />
-            </Button>
+              >
+                Ir al carrito
+                <ShoppingCartIcon
+                  fontSize="small"
+                  sx={{
+                    ml: '6px',
+                  }}
+                />
+              </Button>
+            }
           </Grid>
         </Grid>
       }

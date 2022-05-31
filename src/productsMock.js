@@ -4,6 +4,7 @@ const products = [
     title: 'Lapicera Uniball Signo Broad Ub-153 Trazo 1.0 Blanca',
     description: `El vendedor no incluyó una descripción del producto.`,
     price: 590,
+    stock: 34,
     pictureUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_997894-MLA48666734745_122021-F.webp',
     category: 'Lapiceras',
   },
@@ -15,6 +16,7 @@ const products = [
     Hojas rayadas.
     Diseños a elección, luego de la compra indique por chat el diseño elegido.`,
     price: 850,
+    stock: 9,
     pictureUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_763198-MLA47137569907_082021-F.webp',
     category: 'Cuadernos',
   },
@@ -32,6 +34,7 @@ const products = [
     Solapa con 12 espacios en elásticos de cada lado, 24 en total.
     Compartimento amplio y profundo para útiles.`,
     price: 2999,
+    stock: 12,
     pictureUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_602355-MLA47404477387_092021-F.webp',
     category: 'Cartucheras',
   },
@@ -40,6 +43,7 @@ const products = [
     title: 'Marcadores Copic Sketch X 72 Linea D Doble Punta',
     description: 'Set de markers Copic Sketch x 72 unidades. Importado desde Japón',
     price: 130000,
+    stock: 3,
     pictureUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_691261-MLA41096980672_032020-F.webp',
     category: 'Marcadores',
   },

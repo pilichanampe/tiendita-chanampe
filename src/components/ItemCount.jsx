@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-function ItemCount({ initial, stock, onAdd }) {
+function ItemCount({ initial, stock, onAdd, onUpdate }) {
   const [amount, setAmount] = useState(initial);
   const increase = () => {
     if (stock > amount) {
@@ -81,24 +81,43 @@ function ItemCount({ initial, stock, onAdd }) {
           <AddIcon />
         </IconButton>
       </Card>
-      <Button
-        onClick={() => onAdd(amount)}
-        variant="contained"
-        disabled={!stock}
-        color="accent"
-        sx={{
-          width: '100%',
-          color: 'white !important'
-        }}
-      >
-        <AddShoppingCartIcon
-          fontSize="small"
+      {
+        onUpdate ?
+        <Button
+          onClick={() => onUpdate(amount)}
+          variant="outlined"
+          color="accent"
           sx={{
-            mr: '6px',
+            width: '100%',
           }}
-        />
-        Agregar al carrito
-      </Button>
+        >
+          <AddShoppingCartIcon
+            fontSize="small"
+            sx={{
+              mr: '6px',
+            }}
+          />
+          Actualizar cantidad
+        </Button> :
+        <Button
+          onClick={() => onAdd(amount)}
+          variant="contained"
+          disabled={!stock}
+          color="accent"
+          sx={{
+            width: '100%',
+            color: 'white !important'
+          }}
+        >
+          <AddShoppingCartIcon
+            fontSize="small"
+            sx={{
+              mr: '6px',
+            }}
+          />
+          Agregar al carrito
+        </Button>
+      }
     </Box>
   )
 }

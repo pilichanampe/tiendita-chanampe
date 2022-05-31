@@ -1,56 +1,107 @@
-import { Button } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useCartContext } from '../contexts/CartContext';
+import CartItem from './CartItem';
 
 function Cart({ greeting }) {
-  const { removeItem, cartItems, clearAll } = useCartContext();
+  const { removeItem, cartItems, clearAll, total, getTotal } = useCartContext();
 
   useEffect(() => {
-
-  }, [cartItems]);
+    if (cartItems.length !== 0) {
+      getTotal();
+    }
+  }, [cartItems, total]);
 
   return (
     <>
       <div>{ greeting }</div>
-      <ul>
+      <Grid
+        container
+        sx={{
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100%',
+          padding: '0',
+        }}
+      >
         {
           cartItems &&
           cartItems.map(item => {
             return (
-              <li key={item.id} style={{ border: '2px solid red'}}>
-                <strong>Producto:</strong>{ item.title }
-                <strong>Cantidad:</strong>{item.quantity}
-                <button onClick={(e) => removeItem(e, item.id)}>X</button>
-              </li>
+              <Grid
+                item
+                lg={10}
+                sx={{
+                  width: '100%'
+                }}    
+                key={item.id}
+              >
+                <CartItem
+                  item={item}
+                />
+              </Grid>
             )
           })
         }
-      </ul>
-      {
-        (cartItems.length === 0) ?
-        <>
-          <h3>¡Tu carrito está vacío! Explorá qué productos tenemos para vos</h3>
-          <Button
-            variant="contained"
-            color="accent"
-            sx={{
-              color: 'white !important',
-            }}
-            component={RouterLink}
-            to="/"
-          >
-            Ir a la lista de productos
-          </Button>
-        </> :
-        <Button
-          variant="outlined"
-          color="red"
-          onClick={() => clearAll()}
+        <Grid
+          item
+          lg={10}
+          sx={{
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
         >
-          Eliminar todos los items
-        </Button>
-      }
+          {
+            (cartItems.length === 0) ?
+            <>
+              <Typography
+                variant="h5"
+                sx={{
+                  mr: '16px',
+                  display: 'flex',
+                }}
+              >
+                <strong>
+                  ¡Tu carrito está vacío! Explorá qué productos tenemos para vos
+                </strong>
+              </Typography>
+              <Button
+                variant="contained"
+                color="accent"
+                sx={{
+                  color: 'white !important',
+                }}
+                component={RouterLink}
+                to="/"
+              >
+                Ir a la lista de productos
+              </Button>
+            </> :
+            <>
+              <Button
+                color="red"
+                onClick={() => clearAll()}
+              >
+                Limpiar carrito
+              </Button>
+              <Typography
+                variant="p"
+                sx={{
+                  fontSize: '2rem',
+                  mb: 2,
+                }}
+              >
+                <strong>Total: ${total}</strong>
+              </Typography>
+            </>
+          }
+
+        </Grid>
+      </Grid>
     </>
 
   )

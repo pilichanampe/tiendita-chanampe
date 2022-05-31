@@ -1,4 +1,3 @@
-import { LocalSeeOutlined } from '@mui/icons-material';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext();
@@ -6,6 +5,7 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) { 
   const [cartItems, setCartItems] = useState([]);
+  const [total, setTotal] = useState();
   const [itemsCategories, setItemsCategories] = useState([]);
   
   useEffect(() => {
@@ -18,6 +18,11 @@ export function CartProvider({ children }) {
     }
   },[]);
 
+  const getTotal = () => {
+    const prices = cartItems.map(item => item.price * item.quantity);
+    setTotal(prices.reduce((accumulator, curr) => accumulator + curr));
+  }
+
   const isInCart = (item) => {
     if (cartItems.findIndex(obj => obj.id === item.id) !== -1) {
       return true;
@@ -26,12 +31,16 @@ export function CartProvider({ children }) {
     };
   }
 
+  const updateItem = (item, quantity) => {
+    const itemIndex = cartItems.findIndex(obj => obj.id === item.id);
+    const currentQuantity = cartItems[itemIndex].quantity;
+    cartItems[itemIndex].quantity = currentQuantity + quantity;
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));  
+  }
+
   const addItem = (item, quantity) => {
     if (isInCart(item)) {   
-        const itemIndex = cartItems.findIndex(obj => obj.id === item.id);
-        const currentQuantity = cartItems[itemIndex].quantity;
-        cartItems[itemIndex].quantity = currentQuantity + quantity;
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        updateItem(item, quantity);
 
       } else {
         item.quantity = quantity;
@@ -46,7 +55,6 @@ export function CartProvider({ children }) {
     const updatedItems = cartItems.filter(item => item.id !== itemId);
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     setCartItems(updatedItems);
-
   }
 
   const clearAll = () => {
@@ -58,12 +66,15 @@ export function CartProvider({ children }) {
     <CartContext.Provider
       value={{
         addItem,
+        updateItem,
         removeItem,
         isInCart,
         cartItems,
         setCartItems,
         removeItem,
-        clearAll
+        clearAll,
+        total,
+        getTotal,
       }}
     >
       {children}

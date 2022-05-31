@@ -9,13 +9,17 @@ export const theme = createTheme({
       main: "#EFBCD5"
     },
     accent: {
-      main: "#1976d2"
+      main: "#1976d2",
+      darken: "#0558b0",
     },
     red: {
       main: "#F73A3A"
     },
     white: {
       main: "#ffffff"
+    },
+    lightgray: {
+      main: "#cfcecc"
     }
   },
   shape: {
