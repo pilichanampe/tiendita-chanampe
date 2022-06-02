@@ -38,7 +38,7 @@ function ItemDetail({ item }) {
             <CardMedia
               component="img"
               sx={{
-                height: '400px',
+                height: '300px',
                 width: '100%',
                 objectFit: 'contain',
                 borderRadius: '4px',
