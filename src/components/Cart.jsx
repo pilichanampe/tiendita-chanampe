@@ -123,7 +123,6 @@ function Cart({ greeting }) {
                 <>
                 <Box
                   sx={{
-                    border: '2px solid black',
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'space-between'
@@ -140,6 +139,7 @@ function Cart({ greeting }) {
                     sx={{
                       fontSize: '2rem',
                       mb: 2,
+                      mr: 2,
                     }}
                   >
                     <strong>Total: ${total}</strong>
