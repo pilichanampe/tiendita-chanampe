@@ -1,18 +1,36 @@
-// import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import CartWidget from './CartWidget';
-import { Link as RouterLink, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { useCartContext } from '../contexts/CartContext';
+import Tab from '@mui/material/Tab';
+import { Tabs } from '@mui/material';
+import { useState, useRef, useEffect } from 'react';
 
 export default function NavBar() {
   const categories = ['Cuadernos', 'Cartucheras', 'Marcadores', 'Lapiceras'];
   const { cartItems } = useCartContext();
+  const [selectedCategory, setSelectedCategory] = useState(false);
+  const tabs = useRef();
+
+  const handleChange = (e, newValue) => {
+    setSelectedCategory(newValue);
+  };
+
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      if (tabs.current && !tabs.current.contains(e.target)) {
+        setSelectedCategory(false);
+      };
+    }
+    document.addEventListener('click', checkIfClickedOutside);
+    return () => {
+      document.removeEventListener('click', checkIfClickedOutside);
+    }
+  }, [selectedCategory])
+  
 
   return (
     <Box
@@ -53,19 +71,30 @@ export default function NavBar() {
               alignItems: 'center'
             }}
           >
-            {categories.map((category) => (
-              <MenuItem key={category}>
-                  <RouterLink
+            <Tabs
+              value={selectedCategory}
+              onChange={handleChange}
+              textColor="secondary"
+              indicatorColor="secondary"
+              aria-label="secondary tabs example"
+              ref={tabs}
+            >
+              {
+                categories.map((category) => (
+                  <Tab
+                    value={category}
+                    label={category}
+                    component={RouterLink}
                     to={`/category/${category.toLowerCase()}`}
                     style={{
                       textDecoration: 'none',
                       color: 'white',
                     }}
-                  >
-                    <Typography textAlign="center">{category}</Typography>
-                  </RouterLink>
-                </MenuItem>
-            ))}
+                    key={category}
+                  />
+                ))
+              }
+            </Tabs>
           <RouterLink
             to="/cart"
             style={{

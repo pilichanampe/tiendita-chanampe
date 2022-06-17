@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import { Card, CardActions, CardContent, Grid, TextField } from '@mui/material';
 
 const style = {
-  // position: 'absolute' as 'absolute',
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -84,7 +83,6 @@ export default function CartForm({ show, onSendOrder, onClose }) {
                         <TextField
                           label="Teléfono"
                           id="outlined-size-small"
-                          // defaultValue="Small"
                           size="small"
                           fullWidth
                           type="tel"
@@ -100,7 +98,6 @@ export default function CartForm({ show, onSendOrder, onClose }) {
                         <TextField
                           label="email"
                           id="outlined-size-small"
-                          // defaultValue="Small"
                           size="small"
                           fullWidth
                           type="email"
@@ -111,7 +108,6 @@ export default function CartForm({ show, onSendOrder, onClose }) {
                       item
                       sx={{
                         width: '100%',
-                        // border: '2px solid red',
                         px: '14px'
                       }}
                     >

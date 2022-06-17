@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import ItemList from './ItemList'
 import { useParams } from 'react-router-dom';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import Loader from './Loader';
 
 function ItemListContainer({ greeting }) {
   const [items, setItems] = useState([]);
@@ -60,7 +61,7 @@ function ItemListContainer({ greeting }) {
         {greeting}
       </Typography>
       {
-        loading ? <span>Cargando...</span> : <ItemList items={items} />
+        loading ? <Loader></Loader> : <ItemList items={items} />
       }
     </Box>
   )

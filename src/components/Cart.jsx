@@ -6,6 +6,7 @@ import CartItem from './CartItem';
 import CartForm from './CartForm';
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Loader from './Loader';
 
 function Cart({ greeting }) {
   const { removeItem, cartItems, clearAll, total, getTotal } = useCartContext();
@@ -49,7 +50,7 @@ function Cart({ greeting }) {
     <>
       {
         loading &&
-        <span>Cargando...</span>
+        <Loader></Loader>
       }
       {
         (!loading && !orderId) &&

@@ -49,11 +49,6 @@ export const theme = createTheme({
       },     
     },
     MuiButton: {
-      // defaultProps: {
-      //   sx: {
-      //     margin: 3
-      //   },
-      // },
       styleOverrides: {
         root: {
           marginTop: 6,
@@ -72,12 +67,5 @@ export const theme = createTheme({
         elevation: 3,
       }
     },
-    // MuiCard: {
-    //   styleOverrides: {
-    //     root: {
-    //       padding: '14px 16px',
-    //     }
-    //   }
-    // }
   }
 })

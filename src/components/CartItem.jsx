@@ -26,7 +26,6 @@ function CartItem({ item }) {
       <CardContent
         sx={{
           display: 'flex',
-          // justifyContent: 'start',
           alignItems: 'center',
           width: '100%'
         }}
