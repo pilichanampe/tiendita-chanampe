@@ -55,13 +55,22 @@ function Cart({ greeting }) {
       {
         (!loading && !orderId) &&
         <>
-          <div>{ greeting }</div>
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: '1.5rem',
+              marginBottom: '36px',
+            }}
+          >
+            <strong>{greeting}</strong>
+          </Typography>
           <Grid
             container
             sx={{
               flexDirection: 'column',
               alignItems: 'center',
               width: '100%',
+              maxWidth: '1920px',
               padding: '0',
             }}
           >
@@ -101,12 +110,12 @@ function Cart({ greeting }) {
                   <Typography
                     variant="h5"
                     sx={{
-                      mr: '16px',
                       display: 'flex',
+                      marginBottom: '16px',
                     }}
                   >
                     <strong>
-                      ¡Tu carrito está vacío! Explorá qué productos tenemos para vos
+                      ¡Tu carrito está vacío! Explorá qué productos tenemos para vos:
                     </strong>
                   </Typography>
                   <Button

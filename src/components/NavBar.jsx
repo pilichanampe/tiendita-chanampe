@@ -11,7 +11,7 @@ import { useState, useRef, useEffect } from 'react';
 
 export default function NavBar() {
   const categories = ['Cuadernos', 'Cartucheras', 'Marcadores', 'Lapiceras'];
-  const { cartItems } = useCartContext();
+  const { cartItems, itemsAmount } = useCartContext();
   const [selectedCategory, setSelectedCategory] = useState(false);
   const tabs = useRef();
 
@@ -29,7 +29,7 @@ export default function NavBar() {
     return () => {
       document.removeEventListener('click', checkIfClickedOutside);
     }
-  }, [selectedCategory])
+  }, [selectedCategory, itemsAmount])
   
 
   return (
@@ -103,7 +103,7 @@ export default function NavBar() {
             }}
           >
             <CartWidget
-              items={cartItems ? cartItems.length : false}
+              items={itemsAmount}
             />
           </RouterLink>
           </Box>

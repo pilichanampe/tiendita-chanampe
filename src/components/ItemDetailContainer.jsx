@@ -1,10 +1,10 @@
-import { Box, Typography } from '@mui/material'
-import React, { useState, useEffect } from 'react'
+import { Box, Button, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from './ItemDetail';
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import Loader from './Loader';
-
+import { Link as RouterLink } from 'react-router-dom';
 
 function ItemDetailContainer({ greeting }) {
   const [item, setItem] = useState(null);
@@ -17,7 +17,11 @@ function ItemDetailContainer({ greeting }) {
     const itemRef = doc(db, "items", id);
     getDoc(itemRef)
     .then(response => {
-      setItem({ id: response.id, ...response.data() });  
+      if (response.exists()) {
+        setItem({ id: response.id, ...response.data() });
+      } else {
+        return null;
+      }
     })
     .catch(error => {
       console.error(error);
@@ -40,7 +44,6 @@ function ItemDetailContainer({ greeting }) {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: '16px',
         width: '100%',
       }}
     >
@@ -48,17 +51,45 @@ function ItemDetailContainer({ greeting }) {
         loading ?
         <Loader></Loader> :
         <>
-          <Typography
-            variant="h3"
-            sx={{
-              fontSize: '1.2rem',
-              mb: 3,
-            }}
+          {
+            !loading &&
+            <Typography
+              variant="h3"
+              sx={{
+                fontSize: '1.5rem',
+                marginBottom: '36px',
+              }}
             >
               <strong>{greeting}</strong>
             </Typography>
+          }
           {
-            item ? <ItemDetail item={item} /> : <h5>¡Oh, no! El item que buscás no se encuentra en nuestra base de datos :(.</h5>
+            item ?
+            <ItemDetail item={item} /> :
+            <>
+            <Typography
+              variant="h5"
+              sx={{
+                mr: '16px',
+                display: 'flex',
+              }}
+            >
+              <strong>
+              ¡Oh, no! El producto que buscás no se encuentra en nuestra base de datos :(.
+              </strong>
+            </Typography>
+            <Button
+              variant="contained"
+              color="accent"
+              sx={{
+                color: 'white !important',
+              }}
+              component={RouterLink}
+              to="/"
+            >
+              Volver a productos
+            </Button>
+          </>
           }
         </>
       }

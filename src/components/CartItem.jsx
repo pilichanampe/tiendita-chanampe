@@ -18,6 +18,7 @@ function CartItem({ item }) {
     <Card
       sx={{
         my: '6px',
+        px: '16px',
         display: 'flex',
         width: '100%',
         justifyContent: 'space-between'

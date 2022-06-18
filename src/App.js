@@ -12,6 +12,7 @@ import {
 import ItemListContainer from './components/ItemListContainer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './contexts/CartContext';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   return (
@@ -28,16 +29,17 @@ function App() {
               alignItems: 'center',
               justifyContent: 'center',
               padding: '14px 16px',
+              marginTop: '16px',
             }}
           >
             <Routes>
               <Route
                 path="/"
-                element={<ItemListContainer />}
+                element={<ItemListContainer greeting="Lista de productos" />}
               ></Route>
               <Route
                 path="/category/:categoryId"
-                element={<ItemListContainer />}
+                element={<ItemListContainer greeting="Lista de productos" />}
               ></Route>
               <Route
                 path="/item/:itemId"
@@ -46,6 +48,10 @@ function App() {
               <Route
                 path="/cart"
                 element={<Cart greeting="Detalle del carrito" />}
+              ></Route>
+              <Route
+                path="/*"
+                element={<PageNotFound />}
               ></Route>
             </Routes>
           </Box>

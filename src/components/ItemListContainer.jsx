@@ -47,19 +47,27 @@ function ItemListContainer({ greeting }) {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: '16px',
         width: '100%'
       }}
     >
-      <Typography
-        display="flex"
-        variant="h1"
-        sx={{
-          fontSize: '3rem',
-        }}
-      >
-        {greeting}
-      </Typography>
+      {
+        !loading &&
+        <Typography
+          variant="h3"
+          sx={{
+            fontSize: '1.5rem',
+          }}
+        >
+          <strong>
+            {greeting}
+            {
+              categoryId ?
+              <span>: {categoryId}</span> :
+              <></>
+            }
+          </strong>
+        </Typography>
+      }
       {
         loading ? <Loader></Loader> : <ItemList items={items} />
       }

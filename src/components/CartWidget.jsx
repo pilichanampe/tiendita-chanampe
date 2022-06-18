@@ -1,5 +1,3 @@
-import { Shop2Outlined } from '@mui/icons-material'
-import { Box } from '@mui/material'
 import React from 'react'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@mui/material';
@@ -17,4 +15,4 @@ function CartWidget({ items }) {
   )
 }
 
-export default CartWidget
+export default CartWidget;
