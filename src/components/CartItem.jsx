@@ -32,7 +32,12 @@ function CartItem({ item }) {
         }}
         
       >
-        <Box>
+        <Box
+          sx={{
+            border: '1px solid #e7e7e7',
+            borderRadius: '4px'
+          }}
+        >
           <CardMedia
             component="img"
             sx={{
@@ -48,16 +53,18 @@ function CartItem({ item }) {
         </Box>
         <Box
           sx={{
-            mb: 2,
             ml: 3,
             pl: 3,
             display: 'flex',
-            width: '100%'
+            width: '100%',
           }}
-        >
+          >
           <Box
             sx={{
-              width: '100%'
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center'
             }}
           >
             <Typography
@@ -75,8 +82,8 @@ function CartItem({ item }) {
                 display: 'flex',
               }}
             >
-              Precio unidad:
-              <strong>${item.price}</strong>
+              Cantidad:
+              <strong>{item.quantity}</strong>
             </Typography>
             <Typography
               variant="p"
@@ -85,8 +92,7 @@ function CartItem({ item }) {
                 display: 'flex',
               }}
             >
-              Unidades:
-              <strong>{item.quantity}</strong>
+              <strong>${item.price} c/u</strong>
             </Typography>
           </Box>
           <Box
@@ -118,6 +124,21 @@ function CartItem({ item }) {
             >
               <strong>${item.price * item.quantity}</strong>
             </Typography>
+            <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'end',
+            }}
+          >
+            <Button
+              color='red'
+              size='small'
+              variant="text"
+              onClick={(e) => removeItem(e, item.id)}
+            >
+              Eliminar
+            </Button>
+          </Box>
           </Box>
 
         </Box>
@@ -127,16 +148,6 @@ function CartItem({ item }) {
           onUpdate={updateItem}
         /> */}
       </CardContent>
-      <CardActions disableSpacing>
-        <Button
-          size='small'
-          variant="outlined"
-          color="red"
-          onClick={(e) => removeItem(e, item.id)}
-        >
-          Eliminar
-        </Button>
-      </CardActions>
     </Card>
 
   )

@@ -9,42 +9,14 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Loader from './Loader';
 
 function Cart({ greeting }) {
-  const { removeItem, cartItems, clearAll, total, getTotal } = useCartContext();
-  const [ showForm, setShowForm ] = useState(false);
+  const { cartItems, clearAll, total, getTotal } = useCartContext();
   const [ loading, setLoading ] = useState(false);
-  const [ orderId, setOrderId ] = useState();
-
-  const sendOrder = (buyer) => {
-    setShowForm(false);
-    setLoading(true);
-    const order = {
-      buyer,
-      items: cartItems,
-      date: new Date(),
-      total,
-    }
-    const db = getFirestore();
-    const ordersCollection = collection(db, 'orders');
-    addDoc(ordersCollection, order)
-    .then(({ id }) => {
-      clearAll();
-      setOrderId(id);
-    })
-    .catch(error => console.log(error))
-    .finally(() => {
-      setLoading(false);
-    });
-  }
-
-  const onClose = (isOpen) => {
-    setShowForm(isOpen);
-  }
 
   useEffect(() => {
     if (cartItems.length !== 0) {
       getTotal();
     }
-  }, [cartItems, total, orderId]);
+  }, [cartItems, total]);
 
   return (
     <>
@@ -53,7 +25,7 @@ function Cart({ greeting }) {
         <Loader></Loader>
       }
       {
-        (!loading && !orderId) &&
+        !loading &&
         <>
           <Typography
             variant="h3"
@@ -156,84 +128,25 @@ function Cart({ greeting }) {
                   </Typography>
                 </Box>
                   <Button
+                    component={RouterLink}
                     variant="contained"
                     color="accent"
                     sx={{
                       color: 'white !important',
-                      minWidth: '500px',
-                      py: '16px'
+                      minWidth: '220px',
+                      py: '16px',
+                      alignSelf: 'end',
                     }}
-                    onClick={() => setShowForm(() => !showForm)}
+                    to="/checkout"
                   >
-                    Comprar el carrito
+                    Finalizar compra
                   </Button>
                 </>
               }
-
             </Grid>
-          </Grid>
-          {
-            showForm &&
-            <CartForm
-              show={showForm}
-              onSendOrder={sendOrder}
-              onClose={onClose}
-            />
-          }        
+          </Grid>     
         </>
-      }
-      {
-        (!loading && orderId) &&
-        <>
-          <Typography
-            variant="h5"
-            sx={{
-              mr: '16px',
-              display: 'flex',
-            }}
-          >
-            ¡Tu compra se realizó con éxito!
-          </Typography>
-          <CheckCircleIcon
-            color="success"
-            fontSize="large"
-            sx={{
-              fontSize: '7rem',
-              my: '16px'
-            }}
-          ></CheckCircleIcon>
-          <Typography
-            variant="h5"
-            sx={{
-              mr: '16px',
-              display: 'flex',
-            }}
-          >
-            Tu orden de compra es:
-          </Typography>
-          <Typography
-            variant="h5"
-            sx={{
-              mr: '16px',
-              my: '36px',
-              display: 'flex',
-            }}
-          >
-            <strong>{ orderId }</strong>
-          </Typography>
-          <Button
-            variant="contained"
-            color="accent"
-            sx={{
-              color: 'white !important',
-            }}
-            component={RouterLink}
-            to="/"
-          >
-            Ir a la lista de productos
-          </Button>
-        </>
-      }
+      } 
     </>
 
   )

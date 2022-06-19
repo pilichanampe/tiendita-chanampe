@@ -49,6 +49,7 @@ export default function CartForm({ show, onSendOrder, onClose }) {
                   }}
                 >
                   <strong>Completá con tus datos para finalizar la compra:</strong>
+                  {name} - {phone} - {email}
                 </Typography>
                 <Box
                   component="form"
