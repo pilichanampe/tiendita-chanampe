@@ -1,18 +1,41 @@
-import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { Snackbar, Button, Card, CardContent, CardMedia, Grid, Typography, IconButton, SnackbarContent, Alert } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CloseIcon from '@mui/icons-material/Close';
 import ItemCount from './ItemCount';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCartContext } from '../contexts/CartContext';
+import Slide from '@mui/material/Slide';
 
 function ItemDetail({ item }) {
   const { addItem, cartItems } = useCartContext();
   const [ isAdded, setIsAdded ] = useState(false);
+  const [ snackbar, setSnackbar ] = useState(false);
+  const [quantity, setQuantity ] = useState();
 
   const onAdd = (amount) => {
     addItem(item, amount);
+    setQuantity(amount);
     setIsAdded(true);
+    setSnackbar(true);
   }
+
+  const handleClose = () => {
+    setSnackbar(false);
+  }
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  )
 
   useEffect(() => {
   }, [cartItems]);
@@ -114,6 +137,30 @@ function ItemDetail({ item }) {
             }
           </Grid>
         </Grid>
+      }
+      {
+        snackbar &&
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          color="red"
+          open={snackbar}
+          autoHideDuration={4000}
+          onClose={handleClose}
+          action={action}
+          TransitionComponent={Slide}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{
+                width: '100%',
+                background: '#94f298',
+                border: '1px solid #e7e7e7'
+              }}
+            >
+              Se agregó <strong>{item.title} x {quantity} u.</strong> al carrito
+            </Alert>
+          </Snackbar>
       }
     </>
   )

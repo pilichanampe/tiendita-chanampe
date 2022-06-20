@@ -59,7 +59,6 @@ export function CartProvider({ children }) {
       sumAllItems([...cartItems, item]);
       localStorage.setItem('cartItems', JSON.stringify([...cartItems, item]));
     }
-    alert(`Ud agregó al carrito ${quantity} u. de ${item.title}`);
   };
 
   const removeItem = (e, itemId) => {
