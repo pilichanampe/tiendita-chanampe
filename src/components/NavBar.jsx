@@ -6,14 +6,20 @@ import CartWidget from './CartWidget';
 import { Link as RouterLink } from 'react-router-dom';
 import { useCartContext } from '../contexts/CartContext';
 import Tab from '@mui/material/Tab';
-import { Tabs } from '@mui/material';
+import { IconButton, Tabs, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { useState, useRef, useEffect } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function NavBar() {
   const categories = ['Cuadernos', 'Cartucheras', 'Marcadores', 'Lapiceras'];
   const { cartItems, itemsAmount } = useCartContext();
   const [selectedCategory, setSelectedCategory] = useState(false);
   const tabs = useRef();
+  const [showDrawer, setShowDrawer] = useState();
+
+  const toggleDrawer = () => {
+    setShowDrawer(!showDrawer);
+  }
 
   const handleChange = (e, newValue) => {
     setSelectedCategory(newValue);
@@ -48,64 +54,198 @@ export default function NavBar() {
             justifyContent: 'space-between',
           }}
         >
-          <RouterLink
-            to="/"
-            style={{
-              textDecoration: 'none',
-              color: 'white',
-            }}
-          >
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                flexGrow: 1,
-              }}
-            >
-              ✨ La Tiendita ✨
-            </Typography>
-          </RouterLink>
+          {/* Desktop */}
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center'
+              display: {
+                xs: 'none',
+                sm: 'none',
+                md: 'flex',
+                lg: 'flex',
+              },
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
             }}
           >
-            <Tabs
-              value={selectedCategory}
-              onChange={handleChange}
-              textColor="secondary"
-              indicatorColor="secondary"
-              aria-label="secondary tabs example"
-              ref={tabs}
+            <RouterLink
+              to="/"
+              style={{
+                textDecoration: 'none',
+                color: 'white',
+              }}
             >
-              {
-                categories.map((category) => (
-                  <Tab
-                    value={category}
-                    label={category}
-                    component={RouterLink}
-                    to={`/category/${category.toLowerCase()}`}
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  flexGrow: 1,
+                  width: '170px',
+                }}
+              >
+                ✨ La Tiendita ✨
+              </Typography>
+            </RouterLink>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <Tabs
+                value={selectedCategory}
+                onChange={handleChange}
+                textColor="secondary"
+                indicatorColor="secondary"
+                aria-label="secondary tabs example"
+                ref={tabs}
+              >
+                {
+                  categories.map((category) => (
+                    <Tab
+                      value={category}
+                      label={category}
+                      component={RouterLink}
+                      to={`/category/${category.toLowerCase()}`}
+                      style={{
+                        textDecoration: 'none',
+                        color: 'white',
+                      }}
+                      key={category}
+                    />
+                  ))
+                }
+              </Tabs>
+            <RouterLink
+              to="/cart"
+              style={{
+                textDecoration: 'none',
+                color: 'white'
+              }}
+            >
+              <CartWidget
+                items={itemsAmount}
+              />
+            </RouterLink>
+            </Box>
+          </Box>
+
+          {/* Mobile  */}
+          <Box
+            sx={{
+              display: {
+                xs: 'flex',
+                sm: 'flex',
+                md: 'none',
+                lg: 'none',
+              },
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+            }}          
+          >
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={() => setShowDrawer(!showDrawer)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Drawer
+              anchor="left"
+              open={showDrawer}
+              onClose={toggleDrawer}
+            >
+              <Box
+                sx={{ width: 250 }}
+                role="presentation"
+                onClick={toggleDrawer}
+                onKeyDown={toggleDrawer}
+              >
+                <List>
+                  <ListItem
+                    sx={{
+                      display: 'flex',
+                      pl: '20px'
+                    }}
+                  >
+                    <RouterLink
+                    to="/"
                     style={{
                       textDecoration: 'none',
-                      color: 'white',
+                      color: 'black',
                     }}
-                    key={category}
-                  />
-                ))
-              }
-            </Tabs>
-          <RouterLink
-            to="/cart"
-            style={{
-              textDecoration: 'none',
-              color: 'white'
-            }}
-          >
-            <CartWidget
-              items={itemsAmount}
-            />
-          </RouterLink>
+                  >
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      sx={{
+                        flexGrow: 1,
+                        width: '170px',
+                      }}
+                    >
+                      ✨ La Tiendita ✨
+                    </Typography>
+                    </RouterLink>
+
+                  </ListItem>
+                  {categories.map((category) => (
+                    <ListItem
+                      component={RouterLink}
+                      to={`/category/${category.toLowerCase()}`}
+                      key={category}
+                      sx={{
+                        color: 'primary.main',
+                      }}
+                    >
+                      <ListItemButton>
+                        <ListItemText primary={category} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>            
+            </Drawer>            
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center'
+              }}
+            >
+              <RouterLink
+                to="/"
+                style={{
+                  textDecoration: 'none',
+                  color: 'white',
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    flexGrow: 1,
+                    width: '170px',
+                    mr: '12px'
+                  }}
+                >
+                  ✨ La Tiendita ✨
+                </Typography>
+              </RouterLink>
+              <RouterLink
+                to="/cart"
+                style={{
+                  textDecoration: 'none',
+                  color: 'white',
+                }}
+              >
+                <CartWidget
+                  items={itemsAmount}
+                />
+              </RouterLink>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>
